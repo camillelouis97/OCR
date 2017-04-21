@@ -3,7 +3,7 @@
 # include "segmentation.h"
 
 void buildLinesList(SDL_Surface *img, struct list *lines) {
-	int i = j = 0;
+	int i, j = 0;
 	int isText = 0;
 
 	while(j < img->h) {
@@ -16,7 +16,7 @@ void buildLinesList(SDL_Surface *img, struct list *lines) {
 				struct list *tmp = malloc(sizeof(struct list));
 				list_init(tmp);
 				tmp->data = i;
-				list_insert(lines, tmp);
+				list_append(lines, tmp);
 			}
 		} else {
 			while (i < img->w && getpixel(img, i, j) == SDL_MapRGB(img->format,
@@ -26,7 +26,7 @@ void buildLinesList(SDL_Surface *img, struct list *lines) {
 				struct list *tmp = malloc(sizeof(struct list));
 				list_init(tmp);
 				tmp->data = i;
-				list_insert(lines, tmp);
+				list_append(lines, tmp);
 			}
 		}
 		j++;
@@ -34,7 +34,7 @@ void buildLinesList(SDL_Surface *img, struct list *lines) {
 }
 
 void buildColumnsList(SDL_Surface *img, struct list *columns) {
-  int i = j = 0;
+  int i = 0, j;
   int isText = 0;
 
   while(i < img->w) {
@@ -47,7 +47,7 @@ void buildColumnsList(SDL_Surface *img, struct list *columns) {
         struct list *tmp = malloc(sizeof(struct list));
 				list_init(tmp);
 				tmp->data = i;
-				list_insert(columns, tmp);
+				list_append(columns, tmp);
       }
     } else {
       while (j < img->h && getpixel(img, i, j) == SDL_MapRGB(img->format,
@@ -57,7 +57,7 @@ void buildColumnsList(SDL_Surface *img, struct list *columns) {
 				struct list *tmp = malloc(sizeof(struct list));
 				list_init(tmp);
 				tmp->data = i;
-				list_insert(columns, tmp);
+				list_append(columns, tmp);
 			}
     }
     i++;
@@ -66,8 +66,8 @@ void buildColumnsList(SDL_Surface *img, struct list *columns) {
 
 void buildCharsList(SDL_Surface *img, struct list *lines, struct list *columns,
                    struct *chars) {
-  struct list _lines = lines->next;
-  struct list _columns = columns->next;
+  struct list *_lines = lines->next;
+  struct list *_columns = columns->next;
   while(_lines->next) {
     while(_columns->next) {
       int width = _columns->next->data - _columns->data;
@@ -81,7 +81,7 @@ void buildCharsList(SDL_Surface *img, struct list *lines, struct list *columns,
           putpixel(character, x, y, getpixel(img, i, j)); // filled surface
         }
       }
-      list_insert(chars, character); // insert the surface in the list chars
+      list_append(chars, character); // insert the surface in the list chars
       _lines = _lines->next->next;
       _columns = _columns->next->next;
     }

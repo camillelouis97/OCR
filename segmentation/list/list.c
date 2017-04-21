@@ -8,7 +8,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <time.h>
- 
+
 # include "list.h"
 
 void list_init(struct list *list)
@@ -54,18 +54,10 @@ struct list* list_find(struct list *list, int value)
 	return list->data == value ? list : NULL;
 }
 
-int list_is_sorted(struct list *list)
+void list_append(struct list *list, struct list *elm)
 {
-	while(list->next && list->data <= list->next->data)
-		list = list->next;
-	return list->next == NULL;
-}
-
-void list_insert(struct list *list, struct list *elm)
-{
-	while(list->next && list->data < elm->data)
-		list = list->next;
-	if(list->next)
-		elm->next = list->next;
-	list->next = elm;
+  struct list *_list = list;
+  while (_list->next)
+    _list = _list->next;
+  _list->next = elm;
 }
