@@ -34,7 +34,7 @@ size_t list_len(struct list *list)
 
 void list_push_front(struct list *list, struct list *elm)
 {
-	int* tmp = list->next;
+	struct list *tmp = list->next;
 	list->next = elm;
 	elm->next = tmp;
 }

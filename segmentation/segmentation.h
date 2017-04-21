@@ -11,5 +11,6 @@
 
 void buildLinesList(SDL_Surface *img, struct list *lines);
 void buildColumnsList(SDL_Surface *img, struct list *columns);
+void buildCharsList(SDL_Surface *img, struct list *lines, struct list *columns, struct list *chars);
 
 # endif

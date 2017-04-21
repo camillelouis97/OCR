@@ -64,7 +64,7 @@ void buildColumnsList(SDL_Surface *img, struct list *columns) {
   }
 }
 
-void buildCharList(SDL_Surface *img, struct list *lines, struct list *columns,
+void buildCharsList(SDL_Surface *img, struct list *lines, struct list *columns,
                    struct *chars) {
   struct list _lines = lines->next;
   struct list _columns = columns->next;
